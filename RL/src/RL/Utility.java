@@ -376,10 +376,76 @@ public class Utility {
         return mat;
     }
 
-    public static float[][] matDot(float[][] a, float[][] b)
+    public static float[][] sigmoidPrimeMat(float[][] mat)
     {
-        if (getY(a) != getY(b)) return null;
-        return null;
+        for (int x = 0; x < getX(mat); x++)
+        {
+            for (int y = 0; y < getY(mat); y++)
+            {
+                mat[x][y] = sigmoidPrimInd(mat[x][y]);
+            }
+        }
+        return mat;
     }
 
+    public static float[][] scalarSubMat(float[][] mat1, float[][] mat2)
+    {
+        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
+        float[][] result = new float[mat1.length][mat1[0].length];
+        for (int i = 0; i < mat1.length; i++)
+        {
+            for (int j = 0; j < mat1[0].length; j++)
+            {
+                result[i][j] = mat1[i][j] - mat2[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static float[][] scalarAddMat(float[][] mat1, float[][] mat2)
+    {
+        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
+        float[][] result = new float[mat1.length][mat1[0].length];
+        for (int i = 0; i < mat1.length; i++)
+        {
+            for (int j = 0; j < mat1[0].length; j++)
+            {
+                result[i][j] = mat1[i][j] + mat2[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static float[][] scalarMultMat(float[][] mat1, float[][] mat2)
+    {
+        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
+        float[][] result = new float[mat1.length][mat1[0].length];
+        for (int i = 0; i < mat1.length; i++)
+        {
+            for (int j = 0; j < mat1[0].length; j++)
+            {
+                result[i][j] = mat1[i][j] * mat2[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static float sumOfAll(float[] mat)
+    {
+        float sum = 0;
+        for (float i : mat)
+        {
+            sum += i;
+        }
+        return sum;
+    }
+
+    public static float[] scalarMultiply(float[] mat, float scalar)
+    {
+        for (int i = 0; i < mat.length; i++)
+        {
+            mat[i] = scalar * mat[i];
+        }
+        return mat;
+    }
 }

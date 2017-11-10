@@ -4,62 +4,154 @@ import java.util.ArrayList;
 
 public class NeuralNetwork {
     final int INPUT_LAYER_SIZE, OUTPUT_LAYER_SIZE, NUM_HIDDEN_LAYERS;
+    /**
+     * Sizes of hidden layers of network.
+     * index of size = layer # - 1.
+     */
     int[] hiddenLayerSizes;
+    /**
+     * Layers of neurons.
+     * Index of Neuron[] = layer #.
+     */
+    ArrayList<Neuron[]> neuronLayers = new ArrayList<>();
+    /**
+     * Weights on all synapses between all neurons.
+     * Index of float[] = layer # of preceding layer of neurons.
+     * float[n]    = set of weights for Neuron n in current layer.
+     * float[n][m] = weight of synapse between Neuron n of current layer and Neuron m of next layer.
+     */
     ArrayList<float[][]> weights = new ArrayList<>();
+    /**
+     * Activities of all neurons in all neuron layers.
+     * Index of float[] = layer # - 1
+     */
+    ArrayList<float[]> activities = new ArrayList<>();
+    /**
+     * Activations of all neurons in all neuron layers.
+     * Index of float[] = layer # - 1
+     */
+    ArrayList<float[]> activations = new ArrayList<>();
 
-    public NeuralNetwork(int in, int out, int hidden, int[] hiddensizes)
+    public NeuralNetwork(int in, int out, int numHidden, int[] hiddenSizes)
     {
+        // Numbers for basic structure of network
         INPUT_LAYER_SIZE  = in;
         OUTPUT_LAYER_SIZE = out;
-        NUM_HIDDEN_LAYERS = hidden;
-        hiddenLayerSizes  = hiddensizes;
+        NUM_HIDDEN_LAYERS = numHidden;
+        hiddenLayerSizes  = hiddenSizes;
 
-        float[][] inpWeights = new float[hiddenLayerSizes[0]][INPUT_LAYER_SIZE];
-        for (int i = 0; i < hiddenLayerSizes[0]; i++)
+
+        // Create input layer of neurons
+        Neuron[] inputLayer = new Neuron[INPUT_LAYER_SIZE];
+        int nextLayerSize;
+        if (NUM_HIDDEN_LAYERS > 0) nextLayerSize = hiddenLayerSizes[0];
+        else nextLayerSize = OUTPUT_LAYER_SIZE;
+
+        float[][] inpWeights = new float[INPUT_LAYER_SIZE][nextLayerSize];
+        for (int i = 0; i < INPUT_LAYER_SIZE; i++)
         {
-            for (int j = 0; j < INPUT_LAYER_SIZE; j++)
-            {
-                inpWeights[i][j] = (float) Math.random() * 10;
-            }
+            inputLayer[i] = new Neuron(nextLayerSize);
+            inpWeights[i] = inputLayer[i].weights;
         }
+        neuronLayers.add(inputLayer);
         weights.add(inpWeights);
-        System.out.println(Utility.getX(inpWeights) + " " + Utility.getY(inpWeights));
 
-        for (int i = 0; i < NUM_HIDDEN_LAYERS; i++)
+
+        // Create hidden layers of neurons
+        if (NUM_HIDDEN_LAYERS != 0)
         {
-            int nextLayerSize;
-            if (i == NUM_HIDDEN_LAYERS - 1) nextLayerSize = OUTPUT_LAYER_SIZE;
-            else nextLayerSize = hiddenLayerSizes[i + 1];
-
-            float[][] layerWeights = new float[nextLayerSize][hiddenLayerSizes[i]];
-            for (int j = 0; j < nextLayerSize; j++)
+            for (int i = 0; i < NUM_HIDDEN_LAYERS; i++)
             {
-                for (int k = 0; k < hiddenLayerSizes[i]; k++)
+                // i = layer # - 1
+                int currentLayerSize = hiddenLayerSizes[i];
+                if (i == NUM_HIDDEN_LAYERS - 1) nextLayerSize = OUTPUT_LAYER_SIZE;
+                else nextLayerSize = hiddenLayerSizes[i + 1];
+
+                Neuron[] layer  = new Neuron[currentLayerSize];
+                float[][] layerWeights = new float[currentLayerSize][nextLayerSize];
+
+                for (int j = 0; j < layer.length; j++)
                 {
-                    layerWeights[j][k] = (float) Math.random() * 10;
+                    layer[j] = new Neuron(nextLayerSize);
+                    layerWeights[j] = layer[j].weights;
                 }
+                neuronLayers.add(layer);
+                weights.add(layerWeights);
             }
-            weights.add(layerWeights);
-            System.out.println(Utility.getX(layerWeights) + " " + Utility.getY(layerWeights));
         }
-    }
 
-    public float[][] passForwardComplete(float[][] inputs, int layer)
-    {
-        float[][] a = ForwardProp.passForward(inputs, weights.get(layer));
-        if (layer != weights.size() - 1)
+
+        // Create output layer of neurons
+        Neuron[] outputLayer = new Neuron[OUTPUT_LAYER_SIZE];
+        for (int i = 0; i < OUTPUT_LAYER_SIZE; i++)
         {
-            layer++;
-            return passForwardComplete(a, layer);
+            outputLayer[i] = new Neuron(0);
         }
-        return a;
+        neuronLayers.add(outputLayer);
     }
 
-    public static void main(String[] args)
+    /**
+     * Propagates multiple sets of inputs through the neural network
+     * @param inputs    set of all inputs; inputs[n] = a set of inputs
+     * @return          set of all outputs; out[n] = set of outputs corresponding to inputs[n]
+     */
+    public float[][] propagateForward(float[][] inputs)
     {
-        NeuralNetwork n = new NeuralNetwork(2, 2, 2, new int[] {3, 3});
-        float[][] inputs = new float[][] {{3, 5, 10}, {5, 1, 2}};
-        float[][] x = n.passForwardComplete(inputs, 0);
-        Utility.printMat(x);
+        /**
+         * inputs: inputs[n] = a set of inputs
+         */
+        float[][] out = new float[inputs.length][OUTPUT_LAYER_SIZE];
+
+        for (int i = 0; i < inputs.length; i++)
+        {
+            out[i] = propagateForward(inputs[i]);
+        }
+
+        /**
+         * output: out[n] = set of outputs corresponding to inputs[n]
+         */
+        return out;
+    }
+
+    /**
+     * Propagates a set of inputs through the neural network
+     * @param inputs    set of inputs
+     * @return          set of outputs
+     */
+    public float[] propagateForward(float[] inputs)
+    {
+        // Propagate through input layer
+        Neuron[]  inputLayer = neuronLayers.get(0);
+        float[][] store      = new float[inputs.length][INPUT_LAYER_SIZE];
+
+        for (int i = 0; i < inputLayer.length; i++)
+        {
+            Neuron n = inputLayer[i];
+            float in = inputs[i];
+            store[i] = n.passThrough(new float[] {in});
+        }
+
+
+        // Propagate through remaining layers
+        for (int i = 1; i < neuronLayers.size(); i++)
+        {
+            Neuron[] layer = neuronLayers.get(i);
+
+            int nextLayerSize;
+            if (i == neuronLayers.size() - 1) nextLayerSize = 1;
+            else nextLayerSize = neuronLayers.get(i + 1).length;
+
+            float[][] temp = new float[layer.length][nextLayerSize];
+
+            for (int j = 0; j < layer.length; j++)
+            {
+                float[] neuronIn = Utility.getRow(store, j);
+                temp[j]          = layer[j].passThrough(neuronIn);
+            }
+
+            store = temp;
+        }
+
+        return Utility.getRow(store, 0);
     }
 }
