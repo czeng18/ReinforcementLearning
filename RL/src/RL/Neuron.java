@@ -7,13 +7,15 @@ public class Neuron {
     float[] weights;
     /**
      * Activity of Neuron (before calling activation function, or sigmoid function).
+     * Variable name: z
      */
     float activity,
     /**
      * Activation of Neuron (activation function has been called).
-     * Passed to next layer of neurons
+     * Passed to next layer of neurons.
+     * Variable name: a
      */
-            activation;
+    activation;
 
     public Neuron(float[] out)
     {
@@ -22,10 +24,13 @@ public class Neuron {
 
     public Neuron(int outputs)
     {
-        weights = new float[outputs];
-        for (int i = 0; i < outputs; i++)
+        if (outputs != 0)
         {
-            weights[i] = (float) Math.random();
+            weights = new float[outputs];
+            for (int i = 0; i < outputs; i++)
+            {
+                weights[i] = (float) Math.random();
+            }
         }
     }
 

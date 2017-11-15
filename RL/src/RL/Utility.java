@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author Caroline Zeng
  * @version 1.0.0
- */ 
+ */
 
 public class Utility {
     /*
@@ -39,7 +39,7 @@ public class Utility {
             for (int y = 0; y < rety; y++)
             {
 
-                int sum     = 0;
+                float sum     = 0;
                 float[] row = getRow(mat1, y);
                 float[] col = getCol(mat2, x);
 
@@ -163,12 +163,13 @@ public class Utility {
      */
     public static float[][] transpose(float[][] mat)
     {
-        int dim       = mat.length;
-        float[][] ret = new float[dim][dim];
+        int x         = mat.length;
+        int y         = mat[0].length;
+        float[][] ret = new float[y][x];
 
-        for (int i = 0; i < dim; i++)
+        for (int i = 0; i < y; i++)
         {
-            for (int j = 0; j < dim; j++)
+            for (int j = 0; j < x; j++)
             {
                 ret[i][j] = mat[j][i];
             }

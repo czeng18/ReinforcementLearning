@@ -138,7 +138,10 @@ public class NeuralNetwork {
             Neuron[] layer = neuronLayers.get(i);
 
             int nextLayerSize;
-            if (i == neuronLayers.size() - 1) nextLayerSize = 1;
+            if (i == neuronLayers.size() - 1)
+            {
+                nextLayerSize = 1;
+            }
             else nextLayerSize = neuronLayers.get(i + 1).length;
 
             float[][] temp = new float[layer.length][nextLayerSize];
@@ -146,12 +149,33 @@ public class NeuralNetwork {
             for (int j = 0; j < layer.length; j++)
             {
                 float[] neuronIn = Utility.getRow(store, j);
-                temp[j]          = layer[j].passThrough(neuronIn);
+                float[] x = layer[j].passThrough(neuronIn);
+                temp[j]          = x;
+                System.out.println("j" + j);
             }
 
             store = temp;
         }
 
+        System.out.println(store[0][0]);
+        System.out.println(store.length);
+        System.out.println(store[0].length);
+
         return Utility.getRow(store, 0);
+    }
+
+    public static void main(String[] args)
+    {
+        NeuralNetwork n = new NeuralNetwork(2, 2, 1, new int[] {2});
+        float[] out = n.propagateForward(new float[] {1, 1});
+        float[][] err = GradientDescent.backPropagateLastLayer(n, new float[][] {{1, 1}}, new float[][] {out});
+        for (float[] x : err)
+        {
+            for (float y : x)
+            {
+                System.out.print(y + " ");
+            }
+            System.out.println();
+        }
     }
 }

@@ -11,45 +11,103 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Neuron.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/RL/Neuron.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="NeuralNetwork.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/RL/NeuralNetwork.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Utility.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/RL/Utility.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Neuron.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RL/Neuron.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="50" column="1" lean-forward="false" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+              <folding>
+                <element signature="docComment;field#weights#0;class#Neuron#0" expanded="false" />
+                <element signature="docComment;field#activity#0;class#Neuron#0" expanded="false" />
+                <element signature="docComment;field#activation#0;class#Neuron#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NeuralNetwork.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RL/NeuralNetwork.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="180" column="1" lean-forward="false" selection-start-line="180" selection-start-column="1" selection-end-line="180" selection-end-column="1" />
+              <folding>
+                <element signature="docComment;field#hiddenLayerSizes#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;field#neuronLayers#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;field#weights#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;field#activities#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;field#activations#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="method#NeuralNetwork#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+                <element signature="docComment;method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+                <element signature="method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+                <element signature="method#main#0;class#NeuralNetwork#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utility.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RL/Utility.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="725">
+              <caret line="451" column="1" lean-forward="false" selection-start-line="451" selection-start-column="1" selection-end-line="451" selection-end-column="1" />
+              <folding>
+                <element signature="docComment;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#matrixMultiply#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#scalarMultiply#0;class#Utility#0" expanded="false" />
+                <element signature="method#scalarMultiply#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getMatMinors#0;class#Utility#0" expanded="false" />
+                <element signature="method#getMatMinors#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getMatCofactors#0;class#Utility#0" expanded="false" />
+                <element signature="method#getMatCofactors#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#transpose#0;class#Utility#0" expanded="false" />
+                <element signature="method#transpose#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getInverse#0;class#Utility#0" expanded="false" />
+                <element signature="method#getInverse#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getDet#0;class#Utility#0" expanded="false" />
+                <element signature="method#getDet#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getRow#0;class#Utility#0" expanded="false" />
+                <element signature="method#getRow#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getCol#0;class#Utility#0" expanded="false" />
+                <element signature="method#getCol#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#setRow#0;class#Utility#0" expanded="false" />
+                <element signature="method#setRow#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#setCol#0;class#Utility#0" expanded="false" />
+                <element signature="method#setCol#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#printRow#0;class#Utility#0" expanded="false" />
+                <element signature="method#printRow#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#printMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#printMat#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getX#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#getY#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#sigmoidInd#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+                <element signature="method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+                <element signature="docComment;method#sigmoidMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#sigmoidMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#sigmoidPrimeMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#scalarSubMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#scalarAddMat#0;class#Utility#0" expanded="false" />
+                <element signature="method#sumOfAll#0;class#Utility#0" expanded="false" />
+                <element signature="method#scalarMultiply#1;class#Utility#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GradientDescent.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/RL/GradientDescent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -59,8 +117,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/RL/GradientDescent.java" />
+        <option value="$PROJECT_DIR$/src/RL/NeuralNetwork.java" />
+        <option value="$PROJECT_DIR$/src/RL/Neuron.java" />
         <option value="$PROJECT_DIR$/src/RL/Utility.java" />
+        <option value="$PROJECT_DIR$/src/RL/GradientDescent.java" />
       </list>
     </option>
   </component>
@@ -84,6 +144,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -106,10 +167,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -118,6 +178,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="RL" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/RL" />
@@ -453,59 +516,15 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/RL/ForwardProp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RL/GradientDescent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RL/NeuralNetwork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RL/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RL/GradientDescent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="16" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RL/ForwardProp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RL/Neuron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="docComment;field#weights#0;class#Neuron#0" expanded="false" />
+            <element signature="docComment;field#activity#0;class#Neuron#0" expanded="false" />
+            <element signature="docComment;field#activation#0;class#Neuron#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -513,7 +532,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="docComment;field#hiddenLayerSizes#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#neuronLayers#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#weights#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activities#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activations#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#NeuralNetwork#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#main#0;class#NeuralNetwork#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -521,6 +552,202 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="docComment;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#matrixMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getX#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getY#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimeMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarSubMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarAddMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sumOfAll#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#1;class#Utility#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/ForwardProp.java" />
+    <entry file="file://$PROJECT_DIR$/src/RL/GradientDescent.java" />
+    <entry file="file://$PROJECT_DIR$/src/RL/NeuralNetwork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;field#hiddenLayerSizes#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#neuronLayers#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#weights#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activities#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activations#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#NeuralNetwork#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#main#0;class#NeuralNetwork#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/Utility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#matrixMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getX#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getY#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimeMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarSubMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarAddMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sumOfAll#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#1;class#Utility#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/ForwardProp.java" />
+    <entry file="file://$PROJECT_DIR$/src/RL/NeuralNetwork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="180" column="1" lean-forward="false" selection-start-line="180" selection-start-column="1" selection-end-line="180" selection-end-column="1" />
+          <folding>
+            <element signature="docComment;field#hiddenLayerSizes#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#neuronLayers#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#weights#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activities#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;field#activations#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#NeuralNetwork#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#0;class#NeuralNetwork#0" expanded="false" />
+            <element signature="docComment;method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#propagateForward#1;class#NeuralNetwork#0" expanded="false" />
+            <element signature="method#main#0;class#NeuralNetwork#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/Neuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="50" column="1" lean-forward="false" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+          <folding>
+            <element signature="docComment;field#weights#0;class#Neuron#0" expanded="false" />
+            <element signature="docComment;field#activity#0;class#Neuron#0" expanded="false" />
+            <element signature="docComment;field#activation#0;class#Neuron#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/Utility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="451" column="1" lean-forward="false" selection-start-line="451" selection-start-column="1" selection-end-line="451" selection-end-column="1" />
+          <folding>
+            <element signature="docComment;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#matrixMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatMinors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="method#getMatCofactors#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="method#transpose#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="method#getInverse#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="method#getDet#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#getRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#getCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#setRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="method#setCol#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="method#printRow#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#printMat#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getX#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#getY#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimInd#0;class#Utility#0" expanded="false" />
+            <element signature="docComment;method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sigmoidPrimeMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarSubMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarAddMat#0;class#Utility#0" expanded="false" />
+            <element signature="method#sumOfAll#0;class#Utility#0" expanded="false" />
+            <element signature="method#scalarMultiply#1;class#Utility#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RL/GradientDescent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
