@@ -15,14 +15,16 @@ public class Neuron {
      * Passed to next layer of neurons.
      * Variable name: a
      */
-    activation;
+            activation;
+    int layerNumber;
 
-    public Neuron(float[] out)
+    public Neuron(float[] out, int layer)
     {
-        weights = out;
+        weights     = out;
+        layerNumber = layer;
     }
 
-    public Neuron(int outputs)
+    public Neuron(int outputs, int layer)
     {
         if (outputs != 0)
         {
@@ -32,12 +34,14 @@ public class Neuron {
                 weights[i] = (float) Math.random();
             }
         }
+        layerNumber = layer;
     }
 
     public float[] passThrough(float[] inputs)
     {
         activity = Utility.sumOfAll(inputs);
-        activation = Utility.sigmoidInd(activity);
+        if (layerNumber == 0) activation = activity;
+        else activation = Utility.sigmoidInd(activity);
         if (weights != null)
         {
             float[] out = new float[weights.length];

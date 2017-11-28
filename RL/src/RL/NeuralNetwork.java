@@ -50,7 +50,7 @@ public class NeuralNetwork {
         float[][] inpWeights = new float[INPUT_LAYER_SIZE][nextLayerSize];
         for (int i = 0; i < INPUT_LAYER_SIZE; i++)
         {
-            inputLayer[i] = new Neuron(nextLayerSize);
+            inputLayer[i] = new Neuron(nextLayerSize, 0);
             inpWeights[i] = inputLayer[i].weights;
         }
         neuronLayers.add(inputLayer);
@@ -72,7 +72,7 @@ public class NeuralNetwork {
 
                 for (int j = 0; j < layer.length; j++)
                 {
-                    layer[j] = new Neuron(nextLayerSize);
+                    layer[j] = new Neuron(nextLayerSize, i + 1);
                     layerWeights[j] = layer[j].weights;
                 }
                 neuronLayers.add(layer);
@@ -85,7 +85,7 @@ public class NeuralNetwork {
         Neuron[] outputLayer = new Neuron[OUTPUT_LAYER_SIZE];
         for (int i = 0; i < OUTPUT_LAYER_SIZE; i++)
         {
-            outputLayer[i] = new Neuron(0);
+            outputLayer[i] = new Neuron(0, NUM_HIDDEN_LAYERS + 1);
         }
         neuronLayers.add(outputLayer);
     }
@@ -131,7 +131,6 @@ public class NeuralNetwork {
             store[i] = n.passThrough(new float[] {in});
         }
 
-
         // Propagate through remaining layers
         for (int i = 1; i < neuronLayers.size(); i++)
         {
@@ -148,8 +147,8 @@ public class NeuralNetwork {
 
             for (int j = 0; j < layer.length; j++)
             {
-                float[] neuronIn = Utility.getRow(store, j);
-                float[] x = layer[j].passThrough(neuronIn);
+                float[] neuronIn = Utility.getCol(store, j);
+                float[] x        = layer[j].passThrough(neuronIn);
                 temp[j]          = x;
                 System.out.println("j" + j);
             }
@@ -157,25 +156,46 @@ public class NeuralNetwork {
             store = temp;
         }
 
-        System.out.println(store[0][0]);
-        System.out.println(store.length);
-        System.out.println(store[0].length);
+        pullActs();
 
-        return Utility.getRow(store, 0);
+        return Utility.getCol(store, 0);
+    }
+
+    public void pullActs()
+    {
+        for (int layerNumber = 0; layerNumber < neuronLayers.size(); layerNumber++)
+        {
+            Neuron[] layer = neuronLayers.get(layerNumber);
+            float[] activity = new float[layer.length];
+            float[] activation = new float[layer.length];
+            for (int i = 0; i < layer.length; i++)
+            {
+                activity[i] = layer[i].activity;
+                activation[i] = layer[i].activation;
+            }
+            activities.add(activity);
+            activations.add(activation);
+        }
     }
 
     public static void main(String[] args)
     {
-        NeuralNetwork n = new NeuralNetwork(2, 2, 1, new int[] {2});
-        float[] out = n.propagateForward(new float[] {1, 1});
-        float[][] err = GradientDescent.backPropagateLastLayer(n, new float[][] {{1, 1}}, new float[][] {out});
-        for (float[] x : err)
-        {
-            for (float y : x)
-            {
-                System.out.print(y + " ");
-            }
-            System.out.println();
-        }
+        NeuralNetwork n = new NeuralNetwork(2, 2, 2, new int[] {3, 4});
+        float[][] gout = new float[][] {{1}, {1}};
+        float[][] out = Utility.transpose(new float[][] {n.propagateForward(new float[] {1, 2})});
+        float[][] err = GradientDescent.gradientDescent(n,
+                gout,
+                out,
+                1);
+
+        Utility.printMat(err);
+
+        float[][] err1 = GradientDescent.gradientDescent(n, gout, out, 2);
+
+        Utility.printMat(err1);
+
+        float[][] err2 = GradientDescent.gradientDescent(n, gout, out, 3);
+
+        Utility.printMat(err2);
     }
 }

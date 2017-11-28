@@ -7,18 +7,14 @@ import java.util.Arrays;
  *
  * @author Caroline Zeng
  * @version 1.0.0
- */
+ */ 
 
 public class Utility {
     /*
-     * width  = x = mat.length    = row
-     * height = y = mat[n].length = column
+     * height = x = mat.length    = # of rows    = column length
+     * width  = y = mat[n].length = # of columns = row length
      *
-     * plaintext being ciphered = float[0][textlength]
-     *
-     * multiplication result = float[key.x][text.y]
-     *
-     * get from matrix = mat[x][y]
+     * mat[y] = row
      */
 
     /**
@@ -31,7 +27,7 @@ public class Utility {
     {
         int retx      = getX(mat2);
         int rety      = getY(mat1);
-        float[][] ret = new float[retx][rety];
+        float[][] ret = new float[rety][retx];
 
         for (int x = 0; x < retx; x++)
         {
@@ -39,16 +35,17 @@ public class Utility {
             for (int y = 0; y < rety; y++)
             {
 
-                float sum     = 0;
                 float[] row = getRow(mat1, y);
                 float[] col = getCol(mat2, x);
 
+                float[] res = new float[row.length];
+
                 for (int i = 0; i < row.length; i++)
                 {
-                    sum += row[i] * col[i];
+                    res[i] = row[i] * col[i];
                 }
 
-                ret[x][y] = sum;
+                ret[y][x] = sumOfAll(res);
 
             }
 
@@ -237,7 +234,7 @@ public class Utility {
      * @param y     y-value of the row
      * @return      row of matrix
      */
-    public static float[] getRow(float[][] mat, int y)
+    public static float[] getCol(float[][] mat, int y)
     {
         float[] ret = new float[mat.length];
 
@@ -255,7 +252,7 @@ public class Utility {
      * @param x     x-value of column
      * @return      column of matrix
      */
-    public static float[] getCol(float[][] mat, int x)
+    public static float[] getRow(float[][] mat, int x)
     {
         float[] ret = mat[x];
         return ret;
@@ -265,14 +262,14 @@ public class Utility {
      * Sets a row of a matrix to given values
      * @param mat   matrix to set row
      * @param row   row to set matrix's row to
-     * @param y     y-value of row in matrix
+     * @param x     x-value of row in matrix
      * @return      matrix with new values in given row
      */
-    public static float[][] setRow(float[][] mat, float[] row, int y)
+    public static float[][] setCol(float[][] mat, float[] row, int x)
     {
         for (int i = 0; i < mat.length; i++)
         {
-            mat[i][y] = row[i];
+            mat[i][x] = row[i];
         }
         return mat;
     }
@@ -281,12 +278,12 @@ public class Utility {
      * Sets a column of a matrix to given values
      * @param mat   matrix to set column
      * @param col   column to set matrix's column to
-     * @param x     x-value of column in matrix
+     * @param y     y-value of column in matrix
      * @return      matrix with new values in given column
      */
-    public static float[][] setCol(float[][] mat, float[] col, int x)
+    public static float[][] setRow(float[][] mat, float[] col, int y)
     {
-        mat[x] = col;
+        mat[y] = col;
         return mat;
     }
 
@@ -324,7 +321,7 @@ public class Utility {
      * @param mat   matrix to find x-dimension of
      * @return      x-dimension of matrix
      */
-    public static int getX(float[][] mat)
+    public static int getY(float[][] mat)
     {
         return mat.length;
     }
@@ -334,7 +331,7 @@ public class Utility {
      * @param mat   matrix to get y-dimension of
      * @return      y-dimension of matrix
      */
-    public static int getY(float[][] mat)
+    public static int getX(float[][] mat)
     {
         return mat[0].length;
     }
@@ -357,7 +354,7 @@ public class Utility {
     public static float sigmoidPrimInd(float x)
     {
         // d/dx((1 + e^-x)^-1) = -1 * (1 + e^-x)^-2 * e^-x * -1 = (1 + e^-x)^-2 * e^-x
-        return (float)(Math.pow(1 + Math.pow(Math.E, -x), -2) * (Math.pow(Math.E ,-x)));
+        return (float)sigmoidInd(x) * (1 - sigmoidInd(x));
     }
 
     /**
@@ -383,7 +380,7 @@ public class Utility {
         {
             for (int y = 0; y < getY(mat); y++)
             {
-                mat[x][y] = sigmoidPrimInd(mat[x][y]);
+                mat[y][x] = sigmoidPrimInd(mat[y][x]);
             }
         }
         return mat;
