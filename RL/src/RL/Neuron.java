@@ -4,12 +4,12 @@ public class Neuron {
     /**
      * Weights of outgoing synapses.
      */
-    float[] weights;
+    double[] weights;
     /**
      * Activity of Neuron (before calling activation function, or sigmoid function).
      * Variable name: z
      */
-    float activity,
+    double activity,
     /**
      * Activation of Neuron (activation function has been called).
      * Passed to next layer of neurons.
@@ -18,7 +18,7 @@ public class Neuron {
             activation;
     int layerNumber;
 
-    public Neuron(float[] out, int layer)
+    public Neuron(double[] out, int layer)
     {
         weights     = out;
         layerNumber = layer;
@@ -28,28 +28,28 @@ public class Neuron {
     {
         if (outputs != 0)
         {
-            weights = new float[outputs];
+            weights = new double[outputs];
             for (int i = 0; i < outputs; i++)
             {
-                weights[i] = (float) Math.random();
+                weights[i] = (double) Math.random();
             }
         }
         layerNumber = layer;
     }
 
-    public float[] passThrough(float[] inputs)
+    public double[] passThrough(double[] inputs)
     {
         activity = Utility.sumOfAll(inputs);
         if (layerNumber == 0) activation = activity;
         else activation = Utility.sigmoidInd(activity);
         if (weights != null)
         {
-            float[] out = new float[weights.length];
+            double[] out = new double[weights.length];
             for (int i = 0; i < out.length; i++)
             {
                 out[i] = activation * weights[i];
             }
             return out;
-        } else return new float[] {activity};
+        } else return new double[] {activity};
     }
 }

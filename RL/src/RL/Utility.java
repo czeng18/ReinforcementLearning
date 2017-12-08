@@ -23,11 +23,17 @@ public class Utility {
      * @param mat2  right hand BxC matrix
      * @return      AxC matrix
      */
-    public static float[][] matrixMultiply(float[][] mat1, float[][] mat2)
+    public static double[][] matrixMultiply(double[][] mat1, double[][] mat2)
     {
+        if (mat1[0].length != mat2.length)
+        {
+            System.out.println("UNMULTIPLIABLE");
+            return null;
+        }
         int retx      = getX(mat2);
         int rety      = getY(mat1);
-        float[][] ret = new float[rety][retx];
+
+        double[][] ret = new double[rety][retx];
 
         for (int x = 0; x < retx; x++)
         {
@@ -35,10 +41,9 @@ public class Utility {
             for (int y = 0; y < rety; y++)
             {
 
-                float[] row = getRow(mat1, y);
-                float[] col = getCol(mat2, x);
-
-                float[] res = new float[row.length];
+                double[] row = getRow(mat1, y);
+                double[] col = getCol(mat2, x);
+                double[] res = new double[row.length];
 
                 for (int i = 0; i < row.length; i++)
                 {
@@ -60,16 +65,16 @@ public class Utility {
      * @param s     scalar to multiply matrix by
      * @return      matrix multiplied by scalar
      */
-    public static float[][] scalarMultiply(float[][] mat, float s)
+    public static double[][] scalarMultiply(double[][] mat, double s)
     {
         int x         = getX(mat);
         int y         = getY(mat);
-        float[][] ret = new float[x][y];
+        double[][] ret = new double[y][x];
 
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < y; i++)
         {
 
-            for (int j = 0; j < y; j++)
+            for (int j = 0; j < x; j++)
             {
                 ret[i][j] = mat[i][j] * s;
             }
@@ -84,17 +89,17 @@ public class Utility {
      * @param mat   matrix to find matrix of minors for
      * @return      matrix of minors
      */
-    public static float[][] getMatMinors(float[][] mat)
+    public static double[][] getMatMinors(double[][] mat)
     {
         int dim       = mat.length;
-        float[][] ret = new float[dim][dim];
+        double[][] ret = new double[dim][dim];
 
         for (int x = 0; x < dim; x++)
         {
             for (int y = 0; y < dim; y++)
             {
                 boolean passx   = false;
-                float[][] small = new float[dim - 1][dim - 1];
+                double[][] small = new double[dim - 1][dim - 1];
 
                 for (int i = 0; i < dim; i++)
                 {
@@ -133,17 +138,17 @@ public class Utility {
      * @param mat   matrix to find matrix of cofactors for
      * @return      matrix of cofactors
      */
-    public static float[][] getMatCofactors(float[][] mat)
+    public static double[][] getMatCofactors(double[][] mat)
     {
         int dim          = mat.length;
-        float[][] ret    = new float[dim][dim];
-        float[][] matmin = getMatMinors(mat);
+        double[][] ret    = new double[dim][dim];
+        double[][] matmin = getMatMinors(mat);
 
         for (int x = 0; x < dim; x++)
         {
             for (int y = 0; y < dim; y++)
             {
-                float val = matmin[x][y];
+                double val = matmin[x][y];
                 if ((x + y) % 2 == 1) val = -val;
                 ret[x][y] = val;
             }
@@ -158,11 +163,11 @@ public class Utility {
      * @param mat   matrix to find transpose for
      * @return      transpose of matrix
      */
-    public static float[][] transpose(float[][] mat)
+    public static double[][] transpose(double[][] mat)
     {
         int x         = mat.length;
         int y         = mat[0].length;
-        float[][] ret = new float[y][x];
+        double[][] ret = new double[y][x];
 
         for (int i = 0; i < y; i++)
         {
@@ -175,14 +180,32 @@ public class Utility {
     }
 
     /**
+     * Gets the transpose of a matrix
+     * Essentially flips matrix along its diagonal
+     * @param mat   matrix to find transpose for
+     * @return      transpose of matrix
+     */
+    public static double[][] transpose (double[] mat)
+    {
+        int x = 1;
+        int y = mat.length;
+        double[][] ret = new double[y][x];
+        for (int i = 0; i < y; i++)
+        {
+            ret[i][0] = mat[i];
+        }
+        return ret;
+    }
+
+    /**
      * Gets the inverse of a matrix
      * @param mat   matrix to find inverse for
      * @return      inverse of matrix
      */
-    public static float[][] getInverse(float[][] mat)
+    public static double[][] getInverse(double[][] mat)
     {
-        float det   = getDet(mat);
-        float[][] C = getMatCofactors(mat);
+        double det   = getDet(mat);
+        double[][] C = getMatCofactors(mat);
         return scalarMultiply(C, (1/det));
     }
 
@@ -191,19 +214,19 @@ public class Utility {
      * @param mat   matrix to find determinant of
      * @return      determinant of matrix
      */
-    public static float getDet(float[][] mat)
+    public static double getDet(double[][] mat)
     {
-        float ret = 0;
+        double ret = 0;
         int dim   = mat.length;
 
         if (dim > 2)
         {
-            float[] toprow = getRow(mat, 0);
+            double[] toprow = getRow(mat, 0);
 
             for (int i = 0; i < dim; i++)
             {
-                float t         = toprow[i];
-                float[][] small = new float[dim - 1][dim - 1];
+                double t         = toprow[i];
+                double[][] small = new double[dim - 1][dim - 1];
                 boolean passed  = false;
 
                 for (int j = 0; j < dim; j++)
@@ -231,17 +254,17 @@ public class Utility {
     /**
      * Gets a row of a matrix
      * @param mat   matrix to get row from
-     * @param y     y-value of the row
+     * @param x     y-value of the row
      * @return      row of matrix
      */
-    public static float[] getCol(float[][] mat, int y)
+    public static double[] getCol(double[][] mat, int x)
     {
-        float[] ret = new float[mat.length];
+        double[] ret = new double[mat.length];
 
         for (int i = 0; i < mat.length; i++)
         {
-            float[] col = mat[i];
-            ret[i]      = col[y];
+            double[] col = mat[i];
+            ret[i]       = col[x];
         }
         return ret;
     }
@@ -249,12 +272,12 @@ public class Utility {
     /**
      * Gets a column of a matrix
      * @param mat   matrix to get column from
-     * @param x     x-value of column
+     * @param y     x-value of column
      * @return      column of matrix
      */
-    public static float[] getRow(float[][] mat, int x)
+    public static double[] getRow(double[][] mat, int y)
     {
-        float[] ret = mat[x];
+        double[] ret = mat[y];
         return ret;
     }
 
@@ -265,7 +288,7 @@ public class Utility {
      * @param x     x-value of row in matrix
      * @return      matrix with new values in given row
      */
-    public static float[][] setCol(float[][] mat, float[] row, int x)
+    public static double[][] setCol(double[][] mat, double[] row, int x)
     {
         for (int i = 0; i < mat.length; i++)
         {
@@ -281,7 +304,7 @@ public class Utility {
      * @param y     y-value of column in matrix
      * @return      matrix with new values in given column
      */
-    public static float[][] setRow(float[][] mat, float[] col, int y)
+    public static double[][] setRow(double[][] mat, double[] col, int y)
     {
         mat[y] = col;
         return mat;
@@ -292,12 +315,12 @@ public class Utility {
      * @param mat   matrix to print row of
      * @param y     y-value of row
      */
-    public static void printRow(float[][] mat, int y)
+    public static void printRow(double[][] mat, int y)
     {
-        float[] row = getRow(mat, y);
+        double[] row = getRow(mat, y);
         String out  = "";
 
-        for (float i : row)
+        for (double i : row)
         {
             out += i + " ";
         }
@@ -308,7 +331,7 @@ public class Utility {
      * Prints a matrix
      * @param mat   matrix to print
      */
-    public static void printMat(float[][] mat)
+    public static void printMat(double[][] mat)
     {
         for (int i = 0; i < getY(mat); i++)
         {
@@ -321,7 +344,7 @@ public class Utility {
      * @param mat   matrix to find x-dimension of
      * @return      x-dimension of matrix
      */
-    public static int getY(float[][] mat)
+    public static int getY(double[][] mat)
     {
         return mat.length;
     }
@@ -331,7 +354,7 @@ public class Utility {
      * @param mat   matrix to get y-dimension of
      * @return      y-dimension of matrix
      */
-    public static int getX(float[][] mat)
+    public static int getX(double[][] mat)
     {
         return mat[0].length;
     }
@@ -341,9 +364,9 @@ public class Utility {
      * @param x value
      * @return  transformed "squashed" value
      */
-    public static float sigmoidInd(float x)
+    public static double sigmoidInd(double x)
     {
-        return (float) (1 / (1 + Math.pow(Math.E, -x)));
+        return (double) (1 / (1 + Math.pow(Math.E, -x)));
     }
 
     /**
@@ -351,10 +374,10 @@ public class Utility {
      * @param x value
      * @return  transformed value
      */
-    public static float sigmoidPrimInd(float x)
+    public static double sigmoidPrimInd(double x)
     {
         // d/dx((1 + e^-x)^-1) = -1 * (1 + e^-x)^-2 * e^-x * -1 = (1 + e^-x)^-2 * e^-x
-        return (float)sigmoidInd(x) * (1 - sigmoidInd(x));
+        return (double)sigmoidInd(x) * (1 - sigmoidInd(x));
     }
 
     /**
@@ -362,7 +385,7 @@ public class Utility {
      * @param mat   matrix
      * @return      matrix of "squashed" values
      */
-    public static float[][] sigmoidMat(float[][] mat)
+    public static double[][] sigmoidMat(double[][] mat)
     {
         for (int x = 0; x < getX(mat); x++)
         {
@@ -374,7 +397,7 @@ public class Utility {
         return mat;
     }
 
-    public static float[][] sigmoidPrimeMat(float[][] mat)
+    public static double[][] sigmoidPrimeMat(double[][] mat)
     {
         for (int x = 0; x < getX(mat); x++)
         {
@@ -386,10 +409,10 @@ public class Utility {
         return mat;
     }
 
-    public static float[][] scalarSubMat(float[][] mat1, float[][] mat2)
+    public static double[][] scalarSubMat(double[][] mat1, double[][] mat2)
     {
         if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
-        float[][] result = new float[mat1.length][mat1[0].length];
+        double[][] result = new double[mat1.length][mat1[0].length];
         for (int i = 0; i < mat1.length; i++)
         {
             for (int j = 0; j < mat1[0].length; j++)
@@ -400,10 +423,10 @@ public class Utility {
         return result;
     }
 
-    public static float[][] scalarAddMat(float[][] mat1, float[][] mat2)
+    public static double[][] scalarAddMat(double[][] mat1, double[][] mat2)
     {
         if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
-        float[][] result = new float[mat1.length][mat1[0].length];
+        double[][] result = new double[mat1.length][mat1[0].length];
         for (int i = 0; i < mat1.length; i++)
         {
             for (int j = 0; j < mat1[0].length; j++)
@@ -414,10 +437,10 @@ public class Utility {
         return result;
     }
 
-    public static float[][] scalarMultMat(float[][] mat1, float[][] mat2)
+    public static double[][] scalarMultMat(double[][] mat1, double[][] mat2)
     {
         if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
-        float[][] result = new float[mat1.length][mat1[0].length];
+        double[][] result = new double[mat1.length][mat1[0].length];
         for (int i = 0; i < mat1.length; i++)
         {
             for (int j = 0; j < mat1[0].length; j++)
@@ -428,22 +451,47 @@ public class Utility {
         return result;
     }
 
-    public static float sumOfAll(float[] mat)
+    public static double sumOfAll(double[] mat)
     {
-        float sum = 0;
-        for (float i : mat)
+        double sum = 0;
+        for (double i : mat)
         {
             sum += i;
         }
         return sum;
     }
 
-    public static float[] scalarMultiply(float[] mat, float scalar)
+    public static double sumOfAll(double[][] mat)
+    {
+        double res = 0;
+        for (double[] m : mat)
+        {
+            for (double entry : m)
+            {
+                res += entry;
+            }
+        }
+        return res;
+    }
+
+    public static double[] scalarMultiply(double[] mat, double scalar)
     {
         for (int i = 0; i < mat.length; i++)
         {
             mat[i] = scalar * mat[i];
         }
         return mat;
+    }
+
+    public static boolean areSameSize(double[][] mat1, double[][] mat2)
+    {
+        if (mat1.length == mat2.length && mat1[0].length == mat2[0].length) return true;
+        return false;
+    }
+
+    public static boolean areMultipliable(double[][] mat1, double[][] mat2)
+    {
+        if (mat1[0].length == mat2.length) return true;
+        return false;
     }
 }
