@@ -1,5 +1,3 @@
-package RL;
-
 import java.util.Arrays;
 
 /**
@@ -7,7 +5,7 @@ import java.util.Arrays;
  *
  * @author Caroline Zeng
  * @version 1.0.0
- */ 
+ */
 
 public class Utility {
     /*
@@ -23,7 +21,7 @@ public class Utility {
      * @param mat2  right hand BxC matrix
      * @return      AxC matrix
      */
-    public static double[][] matrixMultiply(double[][] mat1, double[][] mat2)
+    public static double[][] multiply(double[][] mat1, double[][] mat2)
     {
         if (mat1[0].length != mat2.length)
         {
@@ -61,27 +59,66 @@ public class Utility {
 
     /**
      * Multiplies a matrix by a scalar
-     * @param mat   matrix to be multiplied
-     * @param s     scalar to multiply matrix by
-     * @return      matrix multiplied by scalar
+     * @param mat       matrix to be multiplied
+     * @param scalar    scalar to multiply matrix by
+     * @return          matrix multiplied by scalar
      */
-    public static double[][] scalarMultiply(double[][] mat, double s)
+    public static double[][] multiply(double scalar, double[][] mat)
     {
         int x         = getX(mat);
         int y         = getY(mat);
-        double[][] ret = new double[y][x];
+//        double[][] ret = new double[y][x];
 
         for (int i = 0; i < y; i++)
         {
 
             for (int j = 0; j < x; j++)
             {
-                ret[i][j] = mat[i][j] * s;
+//                ret[i][j] = mat[i][j] * scalar;
+                mat[i][j] = mat[i][j] * scalar;
             }
 
         }
 
-        return ret;
+//        return ret;
+        return mat;
+    }
+
+    public static double[] multiply(double scalar, double[] mat)
+    {
+        for (int i = 0; i < mat.length; i++)
+        {
+            mat[i] = scalar * mat[i];
+        }
+        return mat;
+    }
+
+    public static double[][] subtract(double[][] mat1, double[][] mat2)
+    {
+        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
+        double[][] result = new double[mat1.length][mat1[0].length];
+        for (int i = 0; i < mat1.length; i++)
+        {
+            for (int j = 0; j < mat1[0].length; j++)
+            {
+                result[i][j] = mat1[i][j] - mat2[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static double[][] add(double[][] mat1, double[][] mat2)
+    {
+        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
+        double[][] result = new double[mat1.length][mat1[0].length];
+        for (int i = 0; i < mat1.length; i++)
+        {
+            for (int j = 0; j < mat1[0].length; j++)
+            {
+                result[i][j] = mat1[i][j] + mat2[i][j];
+            }
+        }
+        return result;
     }
 
     /**
@@ -185,7 +222,7 @@ public class Utility {
      * @param mat   matrix to find transpose for
      * @return      transpose of matrix
      */
-    public static double[][] transpose (double[] mat)
+    public static double[][] transpose(double[] mat)
     {
         int x = 1;
         int y = mat.length;
@@ -206,7 +243,7 @@ public class Utility {
     {
         double det   = getDet(mat);
         double[][] C = getMatCofactors(mat);
-        return scalarMultiply(C, (1/det));
+        return multiply((1/det), C);
     }
 
     /**
@@ -364,20 +401,11 @@ public class Utility {
      * @param x value
      * @return  transformed "squashed" value
      */
-    public static double sigmoidInd(double x)
+    public static double sigmoid(double x)
     {
-        return (double) (1 / (1 + Math.pow(Math.E, -x)));
-    }
-
-    /**
-     * Performs sigmoid prime function on an individual value
-     * @param x value
-     * @return  transformed value
-     */
-    public static double sigmoidPrimInd(double x)
-    {
-        // d/dx((1 + e^-x)^-1) = -1 * (1 + e^-x)^-2 * e^-x * -1 = (1 + e^-x)^-2 * e^-x
-        return (double)sigmoidInd(x) * (1 - sigmoidInd(x));
+        double ex = Math.pow(Math.E, x);
+        double eminx = Math.pow(Math.E, x * -1);
+        return (ex - eminx) / (ex + eminx);
     }
 
     /**
@@ -385,59 +413,43 @@ public class Utility {
      * @param mat   matrix
      * @return      matrix of "squashed" values
      */
-    public static double[][] sigmoidMat(double[][] mat)
+    public static double[][] sigmoid(double[][] mat)
     {
-        for (int x = 0; x < getX(mat); x++)
+        double[][] ret = new double[mat.length][mat[0].length];
+        for (int x = 0; x < getX(ret); x++)
         {
-            for (int y = 0; y < getY(mat); y++)
+            for (int y = 0; y < getY(ret); y++)
             {
-                mat[x][y] = sigmoidInd(mat[x][y]);
+                ret[y][x] = sigmoid(mat[y][x]);
             }
         }
-        return mat;
+        return ret;
     }
 
-    public static double[][] sigmoidPrimeMat(double[][] mat)
+    /**
+     * Performs sigmoid prime function on an individual value
+     * @param x value
+     * @return  transformed value
+     */
+    public static double sigmoidPrime(double x)
     {
-        for (int x = 0; x < getX(mat); x++)
+        return 1 - Math.pow(sigmoid(x), 2);
+    }
+
+    public static double[][] sigmoidPrime(double[][] mat)
+    {
+        double[][] ret = new double[mat.length][mat[0].length];
+        for (int x = 0; x < getX(ret); x++)
         {
-            for (int y = 0; y < getY(mat); y++)
+            for (int y = 0; y < getY(ret); y++)
             {
-                mat[y][x] = sigmoidPrimInd(mat[y][x]);
+                ret[y][x] = sigmoidPrime(mat[y][x]);
             }
         }
-        return mat;
+        return ret;
     }
 
-    public static double[][] scalarSubMat(double[][] mat1, double[][] mat2)
-    {
-        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
-        double[][] result = new double[mat1.length][mat1[0].length];
-        for (int i = 0; i < mat1.length; i++)
-        {
-            for (int j = 0; j < mat1[0].length; j++)
-            {
-                result[i][j] = mat1[i][j] - mat2[i][j];
-            }
-        }
-        return result;
-    }
-
-    public static double[][] scalarAddMat(double[][] mat1, double[][] mat2)
-    {
-        if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
-        double[][] result = new double[mat1.length][mat1[0].length];
-        for (int i = 0; i < mat1.length; i++)
-        {
-            for (int j = 0; j < mat1[0].length; j++)
-            {
-                result[i][j] = mat1[i][j] + mat2[i][j];
-            }
-        }
-        return result;
-    }
-
-    public static double[][] scalarMultMat(double[][] mat1, double[][] mat2)
+    public static double[][] elementwiseMultiply(double[][] mat1, double[][] mat2)
     {
         if (getX(mat1) != getX(mat2) || getY(mat1) != getY(mat2)) return null;
         double[][] result = new double[mat1.length][mat1[0].length];
@@ -472,15 +484,6 @@ public class Utility {
             }
         }
         return res;
-    }
-
-    public static double[] scalarMultiply(double[] mat, double scalar)
-    {
-        for (int i = 0; i < mat.length; i++)
-        {
-            mat[i] = scalar * mat[i];
-        }
-        return mat;
     }
 
     public static boolean areSameSize(double[][] mat1, double[][] mat2)

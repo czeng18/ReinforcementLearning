@@ -1,6 +1,5 @@
-package RL;
-
-public class Neuron {
+public class Neuron
+{
     /**
      * Weights of outgoing synapses.
      */
@@ -15,12 +14,13 @@ public class Neuron {
      * Passed to next layer of neurons.
      * Variable name: a
      */
-            activation;
+    activation;
     int layerNumber;
 
-    public Neuron(double[] out, int layer)
+
+    public Neuron(double[] w, int layer)
     {
-        weights     = out;
+        this.weights = w;
         layerNumber = layer;
     }
 
@@ -31,25 +31,27 @@ public class Neuron {
             weights = new double[outputs];
             for (int i = 0; i < outputs; i++)
             {
-                weights[i] = (double) Math.random();
+                weights[i] = Math.random();
             }
         }
         layerNumber = layer;
     }
 
-    public double[] passThrough(double[] inputs)
+    public double[] passForward(double[] inputs)
     {
         activity = Utility.sumOfAll(inputs);
-        if (layerNumber == 0) activation = activity;
-        else activation = Utility.sigmoidInd(activity);
+        if (layerNumber == 0 || weights == null)
+        {
+            activation = activity;
+        } else
+        {
+            activation = Utility.sigmoid(activity);
+        }
+
         if (weights != null)
         {
-            double[] out = new double[weights.length];
-            for (int i = 0; i < out.length; i++)
-            {
-                out[i] = activation * weights[i];
-            }
-            return out;
-        } else return new double[] {activity};
+            return Utility.multiply(activation, weights);
+        }
+        return new double[] {activity};
     }
 }
